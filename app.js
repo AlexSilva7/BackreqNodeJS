@@ -20,7 +20,7 @@ app.get('/',(req,res)=> {
 })
 
 app.get('/noticia',(req,res) =>{
-    var id= req.query.id
+    var id = req.query.id
     res.render('noticias/noticia',
     {noticia:noticias[id], title:'noticia'})
 })
