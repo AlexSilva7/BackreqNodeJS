@@ -1,31 +1,39 @@
+//importando o express
+const  express = require('express')
 
-/*
-npm install express
-npm install ejs
---npm install -g nodemon
-*/
-
-//Importando o express
-const express = require('express')
-
-//Criando um objeto express na variavel app
+//criando um objeto express na variável app
 const app = express()
-app.set('view engine', 'ejs')
 
-const noticias = require('./mockup.js')
+//configurando a ejs
+app.set('view engine','ejs')
 
-//Criando nossa primeira rota
-app.get('/',(req, res) => {
-    res.render("home/index", {noticias:noticias.slice(0,3), title:'Home'})
+//definindo o caminho da views wjs
+app.set('views', './app/views')
+
+//config de arquivos estáticos
+app.use(express.static('./app/public'))
+
+const noticias= require('./mockup.js')
+
+app.get('/',(req,res)=> {
+    res.render("home/index",{noticias:noticias.slice(0,3),title:'Home'})
 })
 
-//Criando nossa segunda rota
-app.get('/noticias',(req, res) => {
-    res.send("Todas as noticias atuais")
+app.get('/noticia',(req,res) =>{
+    var id= req.query.id
+    res.render('noticias/noticia',
+    {noticia:noticias[id], title:'noticia'})
 })
 
-//Iniciando o servidor na porta 3000
-app.listen(3000, () =>{
-    console.log('Escutando na porta 3000 com Express')
-    console.log('Pressione CTRL + C para encerrar o servidor')
+app.get('/noticias',(req,res)=>{
+    res.render("noticias/noticias", {noticias:noticias, title: 'noticias'})
+})
+
+app.get('/admin',(req,res) =>{
+    res.render("admin/form_add_noticia", {title:'admin'})
+})
+
+app.listen(3000,()=>{
+    console.log('Escutando na porta 3000')
+    console.log('Pressione CRTL+C para encerrar o servidor')
 })
