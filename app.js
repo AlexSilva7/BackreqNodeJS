@@ -51,7 +51,14 @@ app.post('/admin/salvar-noticia', async(req, res) =>{
     )
 })
 
+/*
 app.listen(3000,()=>{
+    console.log('Escutando na porta 3000')
+    console.log('Pressione CRTL+C para encerrar o servidor')
+})
+*/
+
+app.listen(process.env.PORT || 3000, () => {
     console.log('Escutando na porta 3000')
     console.log('Pressione CRTL+C para encerrar o servidor')
 })
