@@ -7,12 +7,12 @@
                 }
             },
             "previewLimit": 50,
+            "askForPassword": true,
             "server": "localhost",
             "port": 5432,
-            "askForPassword": true,
             "driver": "PostgreSQL",
-            "name": "HEROKU",
-            "connectString": "postgres://rdebyiaopwjgpk:b219780e5e3d4a114cf96e10757e7bef17578ba5f6e2c0a30a537e0e5e556508@ec2-18-214-238-28.compute-1.amazonaws.com:5432/d24gct5jaeghc4"
+            "name": "Heroku",
+            "connectString": "postgres://muprdwnmylnzua:50f952bfa6f300e364bc6d471d890c5e6527b581ab8224d603c39f0911fa29f4@ec2-34-233-105-94.compute-1.amazonaws.com:5432/d9cdpvdi13op2m"
         }
     ]
 }

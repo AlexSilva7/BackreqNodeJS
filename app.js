@@ -1,5 +1,5 @@
 //importando o express
-const  express = require('express')
+const express = require('express')
 
 //criando um objeto express na variável app
 const app = express()
@@ -13,24 +13,42 @@ app.set('views', './app/views')
 //config de arquivos estáticos
 app.use(express.static('./app/public'))
 
-const noticias= require('./mockup.js')
+//const noticias = require('./mockup.js')
+const dbconnection = require('./dbConnection')
 
-app.get('/',(req,res)=> {
-    res.render("home/index",{noticias:noticias.slice(0,3),title:'Home'})
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
+app.get('/', async (req,res)=> {
+    //consulta SQL
+    var result = await dbconnection.query('SELECT * FROM noticias order by id_noticia desc limit 3')
+    res.render("home/index",{noticias:result.rows,title:'Home'})
 })
 
-app.get('/noticia',(req,res) =>{
+app.get('/noticia', async (req,res) =>{
     var id = req.query.id
-    res.render('noticias/noticia',
-    {noticia:noticias[id], title:'noticia'})
+    let result = await dbconnection.query('SELECT *  from noticias where id_noticia= $1',[id])
+    res.render('noticias/noticia',{noticia:result.rows[0], title:'noticia'})
 })
 
-app.get('/noticias',(req,res)=>{
-    res.render("noticias/noticias", {noticias:noticias, title: 'noticias'})
+app.get('/noticias', async (req,res)=>{
+    var result = await dbconnection.query('SELECT * FROM  noticias order by id_noticia desc')
+    res.render("noticias/noticias", {noticias:result.rows, title: 'noticias'})
 })
 
 app.get('/admin',(req,res) =>{
     res.render("admin/form_add_noticia", {title:'admin'})
+})
+
+app.post('/admin/salvar-noticia', async(req, res) =>{
+    let {titulo, conteudo} = req.body
+
+    result = await dbconnection.query('INSERT INTO noticias (titulo, conteudo) VALUES($1, $2)', 
+    [titulo, conteudo],
+    (err, result) => {
+        res.redirect('/noticias')
+        }
+    )
 })
 
 app.listen(3000,()=>{
