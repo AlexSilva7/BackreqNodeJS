@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/celleptech-code/projeto_curso_nodejs.git"
+    "url": "git+https://github.com/AlexSilva7/BackreqNodeJS.git"
   },
   "author": "Alex Silva",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/celleptech-code/projeto_curso_nodejs/issues"
+    "url": "https://github.com/AlexSilva7/BackreqNodeJS/issues"
   },
-  "homepage": "https://github.com/celleptech-code/projeto_curso_nodejs#readme",
+  "homepage": "https://github.com/AlexSilva7/BackreqNodeJS#readme",
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
