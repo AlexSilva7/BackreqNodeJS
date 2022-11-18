@@ -6,7 +6,6 @@ const app = express()
 
 //teste
 const sql = require("mssql");
-const connStr = "Server=mgpserver01;Database=FINANCEIRO_RELATORIOS;User Id=307605;Password=506703;Encrypt=false;";
 
 
 sql.connect(connStr)
