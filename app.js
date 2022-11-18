@@ -4,6 +4,30 @@ const express = require('express')
 //criando um objeto express na variável app
 const app = express()
 
+//teste
+const sql = require("mssql");
+const connStr = "Server=mgpserver01;Database=FINANCEIRO_RELATORIOS;User Id=307605;Password=506703;Encrypt=false;";
+
+
+sql.connect(connStr)
+   .then(conn => console.log("conectou!"))
+   .catch(err => console.log("erro! " + err));
+
+app.get('/teste', async (req, res) => {
+    try {
+        // make sure that any items are correctly URL encoded in the connection string
+        //await sql.connect('Server=localhost,1433;Database=database;User Id=username;Password=password;Encrypt=true')
+        let result = await sql.query(`SELECT TOP 2 * FROM [BASE_GED_DIARIA_HISTORICO_TOMBADA_ENGENHARIA] WHERE PROTOCOLO = '405139449'`)
+        console.log(result.recordset)
+        res.json(result.recordset)
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+
+
+
 //configurando a ejs
 app.set('view engine','ejs')
 
